@@ -419,6 +419,9 @@ abstract class AbstractPlatform
 
         $dbType = strtolower($dbType);
 
+        // fixing bug when changing a table with a json column
+        $this->doctrineTypeMapping['json'] = 'string';
+
         if (!isset($this->doctrineTypeMapping[$dbType])) {
             throw new \Doctrine\DBAL\DBALException("Unknown database type ".$dbType." requested, " . get_class($this) . " may not support it.");
         }
